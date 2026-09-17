@@ -245,10 +245,6 @@ CROSS JOIN media_faturamento mf
 WHERE fe.faturamento_total > mf.media_geral
 ORDER BY fe.faturamento_total DESC;
 
-
--- ------------------------------------------------------------
--- Desafio adicional — Questão 2 reescrita com subquery
--- ------------------------------------------------------------
 SELECT
     categoria,
     quantidade_vendas,
@@ -267,24 +263,3 @@ FROM (
 ) AS resumo_categorias
 WHERE faturamento_total > 10000.00
 ORDER BY faturamento_total DESC;
-
--- Comparação CTE x Subquery:
---
--- Legibilidade: a CTE é mais legível porque nomeia o passo intermediário
--- (resumo_categorias) antes da consulta principal, deixando claro o que
--- cada bloco representa. Na subquery, é preciso "ler de dentro para fora"
--- para entender a lógica.
---
--- Organização: a CTE separa visualmente a etapa de agregação da etapa de
--- filtro/ordenação final, enquanto na subquery tudo fica aninhado dentro
--- do FROM, misturando os níveis de consulta.
---
--- Níveis de aninhamento: a subquery adiciona um nível de aninhamento
--- (subconsulta dentro do FROM), enquanto a CTE mantém a consulta principal
--- "no nível zero", tornando o SQL mais plano e fácil de acompanhar.
---
--- Facilidade de manutenção: a CTE é mais fácil de manter e reaproveitar,
--- pois poderia ser referenciada mais de uma vez na mesma consulta (ex.:
--- em um JOIN) sem repetir a lógica de agregação. A subquery, se precisar
--- ser reutilizada, teria que ser copiada novamente em outro trecho da
--- consulta, aumentando o risco de erro e duplicação de código.
